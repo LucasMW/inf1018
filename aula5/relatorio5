@@ -1,0 +1,108 @@
+
+Ex1 
+int b[2]; => int b ocupa 4 bytes => int b[1] ocupa 4 bytes => int b[2] ocupa 8bytes
+short a[2][3]; short ocupa 2 bytes => existem 6 casas nessa matriz 
+(como um vetor de 6 casas) => short a[2][3] ocupa 12 bytes 
+
+#include <stdio.h>
+
+void dump (void *p, int n)
+ {
+  unsigned char *p1 = p;
+  while (n--) {
+    printf("%p - %02x\n", p1, *p1);
+    p1++;
+  }
+}
+
+int main (void) {
+  int i,j;
+  short a[2][3];
+  int b[2];
+
+  for (i=0;i<2;i++) {
+    b[i] = i;
+    for (j=0;j<3;j++)
+      a[i][j] = 2+i-j;
+  }
+
+  printf ("b: \n");
+  dump (b, sizeof(b));
+  printf ("a: \n");
+  dump (a, sizeof(a));
+
+  return 0;
+}
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula5] ./aula5.1
+b: 
+0x7fff68e04d30 - 00
+0x7fff68e04d31 - 00
+0x7fff68e04d32 - 00
+0x7fff68e04d33 - 00
+0x7fff68e04d34 - 01
+0x7fff68e04d35 - 00
+0x7fff68e04d36 - 00
+0x7fff68e04d37 - 00
+a: 
+0x7fff68e04d40 - 02
+0x7fff68e04d41 - 00
+0x7fff68e04d42 - 01
+0x7fff68e04d43 - 00
+0x7fff68e04d44 - 00
+0x7fff68e04d45 - 00
+0x7fff68e04d46 - 03
+0x7fff68e04d47 - 00
+0x7fff68e04d48 - 02
+0x7fff68e04d49 - 00
+0x7fff68e04d4a - 01
+0x7fff68e04d4b - 00
+
+Os testes confirmam as minhas expectativas
+
+Ex2
+#include <stdio.h>
+
+struct x {
+  int a;
+  int b;
+  short c;
+  int d;
+};
+typedef struct x X;
+
+void dump (void *p, int n)
+ {
+  unsigned char *p1 = p;
+  while (n--) {
+    printf("%p - %02x\n", p1, *p1);
+    p1++;
+  }
+}
+
+int main (void) {
+X x= {0xa1a2a3a4, 0xb1b2b3b4, 0xc1c2, 0xd1d2d3d4};
+dump(&x,sizeof(x));
+printf("%i\n",sizeof(X));
+  return 0;
+}
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula5] ./aula5.2
+0x7fff8d889cd0 - a4
+0x7fff8d889cd1 - a3
+0x7fff8d889cd2 - a2
+0x7fff8d889cd3 - a1
+0x7fff8d889cd4 - b4
+0x7fff8d889cd5 - b3
+0x7fff8d889cd6 - b2
+0x7fff8d889cd7 - b1
+0x7fff8d889cd8 - c2
+0x7fff8d889cd9 - c1
+0x7fff8d889cda - 00
+0x7fff8d889cdb - 00
+0x7fff8d889cdc - d4
+0x7fff8d889cdd - d3
+0x7fff8d889cde - d2
+0x7fff8d889cdf - d1
+16
+
+Não faço a mínima idéia de porque há esse buraco....
+

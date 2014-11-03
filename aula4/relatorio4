@@ -1,0 +1,59 @@
+int xbyte (packed_t word, int bytenum) {
+
+int i;
+	for(i=0;i<bytenum;i++)
+        	word=word>>8;
+	word=word&0xff;
+	if(word&0x80)
+		word=word+0xffffff00; // mesmo resultado com word|0xffffff00
+	return word;
+
+
+}
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte 01abcd02 0
+00000002  2
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte 11a032b5 0
+ffffffb5  -75
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte 11a032b5 1
+00000032  50
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte 11a032b5 2
+ffffffa0  -96
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte 11a032b5 3
+00000011  17
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte abcd 3
+00000000  0
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte abcd 1
+ffffffab  -85
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./xbyte zzzz 1
+pane: numero invalido! 
+
+
+ex 4
+int -1= 		0xFFFFFFFF
+unsigned int 2= 	0x00000002
+O Unsigned deve predominar sobre a comparação de menor 
+fazendo-a ser compilada como comparação unsigned.
+na comparação unsigned tudo é menor que 0xFFFFFFFF.
+
+ex5
+Na memória signed char sc=-1 é 0xFF
+O que acontece é que na hora de fazer a expansão, ele faz a expansão signed,
+ou seja, -1 em int é 0xFFFFFFFF. Essa é precisamente a atribuição que ele faz:
+ui é agora 0xFFFFFFFF o maior valor possível unsigned int.
+
+Como testei:
+#include<stdio.h>
+
+int main (void)
+{
+signed char sc = -1;
+unsigned int ui = sc;
+
+printf("sc=%i ui=%u %p\n",ui,ui,ui);
+return 0;
+}
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula4] ./aula4.5
+sc=-1 ui=4294967295 0xffffffff
+
+
+

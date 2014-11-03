@@ -1,0 +1,105 @@
+1
+foo1.s
+/*float foo (double a, float b) {
+  return (a+b)*(a-b);
+}*/
+.global foo
+foo:	push 	%ebp
+	mov	%esp, %ebp
+	
+
+	flds	 16(%ebp) /*float b*/
+	fldl	 8(%ebp) /*double a*/
+	fsubp           /* a-b */
+	fldl	8(%ebp) /*double a*/
+	flds	16(%ebp) /*float b*/
+	faddp  /* b+a */
+	fmulp  
+	
+	
+	movl 	%ebp, %esp
+	pop  	%ebp
+	ret
+	
+foo1.c
+float foo (double a, float b) {
+  return (a+b)*(a-b);
+}
+main.c
+#include<stdio.h>
+float foo (double a, float b);
+
+int main (void)
+{
+float x=3.5;
+float y=2.5;
+float r;
+
+r=foo(x,y);
+printf("resultado: %f\n",r);
+return 0;
+
+}
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] gcc -Wall -m32 -o prog1 main.c foo1.s
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] ./prog1                resultado: 6.000000
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] gcc -Wall -m32 -o prog1 main.c foo1.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] ./prog1                resultado: 6.000000
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] gcc -Wall -m32 -o prog1 mainsemprototipo.c foo1.s
+mainsemprototipo.c: In function ‘main’:
+mainsemprototipo.c:10:1: warning: implicit declaration of function ‘foo’ [-Wimplicit-function-declaration]
+ r=foo(x,y);
+ ^
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] ./prog1                resultado: 1075838976.000000
+ 
+
+Suponho que o compilador não conhece o protótipo e seguiu uma convenção que não faz sentido para a função foo em assembly; Provavelmente a tratou como inteiro e pegou um valor do %eax
+
+2 
+foo2.s
+.global foo1s
+.text
+foo1s:	push 	%ebp
+	mov	%esp, %ebp
+	
+
+	flds	12(%ebp) /*float b*/
+	flds	8(%ebp) /*float a*/
+	
+	sub	$8,%esp /* push double: aloque espaço */
+	fstpl	(%esp) /* store double */
+	
+	call	sin
+	addl     $8 ,%esp /* desaloque essa chapa */
+	
+	flds	12(%ebp) /*float b*/
+	faddp  /* b+a */
+	
+	
+	
+	movl 	%ebp, %esp
+	pop  	%ebp
+	ret
+foo2.c
+#include<math.h>
+float foo1 (float a, float b) {
+  return sin(a) + b;
+}
+main2.c
+#include<stdio.h>
+float foo1 (float a, float b);
+float foo1s (float a, float b);
+int main (void)
+{
+printf("foo.c %f foo.s %f\n",foo1(3,4),foo1s(3,4));
+printf("foo.c %f foo.s %f\n",foo1(300,-440),foo1s(300,-440));
+printf("foo.c %f foo.s %f\n",foo1(-890,4),foo1s(-890,4));
+
+
+return 0;
+}
+	
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] gcc -Wall -lm -m32 -o prog2 main2.c foo2.c foo2.s
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula11] ./prog2                foo.c 4.141120 foo.s 4.141120
+foo.c -440.999756 foo.s -440.999756
+foo.c 4.801189 foo.s 4.801189
+

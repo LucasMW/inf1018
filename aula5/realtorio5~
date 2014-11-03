@@ -1,0 +1,136 @@
+sizeof(int b[2]) = sizeof(int)*2 = 4*2= 8 bytes
+sizeof(short a[2][3]) = sizeof(short)*2*3 = 2*2*3 =12 bytes;
+
+aula5.1.c
+-------------------------------------------------------------------
+#include <stdio.h>
+
+
+void dump (void *p, int n)
+ {
+  unsigned char *p1 = p;
+  while (n--) {
+    printf("%p - %02x\n", p1, *p1);
+    p1++;
+  }
+}
+
+int main (void) {
+  int i,j;
+  short a[2][3];
+  int b[2];
+
+  for (i=0;i<2;i++) {
+    b[i] = i;
+    for (j=0;j<3;j++)
+      a[i][j] = 2+i-j;
+  }
+
+  printf ("b: \n");
+  dump (b, sizeof(b));
+  printf ("a: \n");
+  dump (a, sizeof(a));
+
+  return 0;
+}
+---------------------------------------------------------
+
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula5] ./aula5.1
+b: 
+0x7fff013d8ac0 - 00
+0x7fff013d8ac1 - 00
+0x7fff013d8ac2 - 00
+0x7fff013d8ac3 - 00
+0x7fff013d8ac4 - 01
+0x7fff013d8ac5 - 00
+0x7fff013d8ac6 - 00
+0x7fff013d8ac7 - 00
+a: 
+0x7fff013d8ad0 - 02
+0x7fff013d8ad1 - 00
+0x7fff013d8ad2 - 01
+0x7fff013d8ad3 - 00
+0x7fff013d8ad4 - 00
+0x7fff013d8ad5 - 00
+0x7fff013d8ad6 - 03
+0x7fff013d8ad7 - 00
+0x7fff013d8ad8 - 02
+0x7fff013d8ad9 - 00
+0x7fff013d8ada - 01
+0x7fff013d8adb - 00
+
+Respostas confirmadas
+
+Ex 2:
+
+aula5.2.c
+--------------------------------------------
+#include <stdio.h>
+
+struct x {
+  int a;
+  int b;
+  short c;
+  int d;
+};
+typedef struct x X;
+
+void dump (void *p, int n)
+ {
+  unsigned char *p1 = p;
+  while (n--) {
+    printf("%p - %02x\n", p1, *p1);
+    p1++;
+  }
+}
+
+int main (void) {
+X x= {0xa1a2a3a4, 0xb1b2b3b4, 0xc1c2, 0xd1d2d3d4};
+dump(&x,sizeof(x));
+printf("%i\n",sizeof(X));
+  return 0;
+}
+--------------------------------------------------
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula5] ./aula5.2
+0x7fffaf8dc580 - a4
+0x7fffaf8dc581 - a3
+0x7fffaf8dc582 - a2
+0x7fffaf8dc583 - a1
+0x7fffaf8dc584 - b4
+0x7fffaf8dc585 - b3
+0x7fffaf8dc586 - b2
+0x7fffaf8dc587 - b1
+0x7fffaf8dc588 - c2
+0x7fffaf8dc589 - c1
+0x7fffaf8dc58a - 00
+0x7fffaf8dc58b - 00
+0x7fffaf8dc58c - d4
+0x7fffaf8dc58d - d3
+0x7fffaf8dc58e - d2
+0x7fffaf8dc58f - d1
+16
+
+Resposta: Teoricamente o tamanho da estrutura deveria ser 4+4+2+4=14 bytes(soma dos tamanhos de suas variáveis absolutas). Porém o seu tamanho é 16 bytes. Isso acontece porque o compilador C decide pelo o alinhamento dos tipos (útil na hora de criar arrays). No caso Valores Ints só podem começar em múltiplos de 4. Como o endereço 0x7fffaf8dc58a não é múltiplo de 4 , o compilador completa o espaço até  endereço múltiplo. Isso é chamado de padding.  0x7fffaf8dc58c é múltiplo de 4 , portanto será onde o valor da última variável int será gravado.
+
+Ex 3
+
+a 12 bytes;
+b 8 bytes
+c 8 bytes
+d 16 bytes
+e 4 bytes
+f 12 bytes
+g 5 bytes
+h 5 bytes
+
+
+
+
+
+
+
+
+
+
+
+

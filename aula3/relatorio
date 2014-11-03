@@ -1,0 +1,70 @@
+/* Relatório Aula 3 */
+Lucas Menezes Oliveira Sousa 
+c1310844
+
+Ex 1
+aula3.1.c:
+#include<stdio.h>
+Programa:
+unsigned int mul (unsigned int a, unsigned int b) {
+  unsigned int p = 0;
+  while (b) {
+    if (b&1) //bit 1 presente na última posição ?
+      p += a;
+    a=a << 1; //a*=2
+    b =b>>1; // b/=2
+  }
+  return p;
+}
+int main (void)
+{
+int a=105;
+int b=40;
+	printf("%d\n",mul(a,b));
+return 0;
+}
+Terminal:
+gcc -Wall -o aula3.1 aula3.1.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula3] ./aula3.1
+4200
+ex2:
+#include<stdio.h>
+int getSeq(unsigned int pacote)
+{
+pacote=pacote<<1; //some com bit 31
+pacote=pacote>>28; // some com o resto
+return pacote;
+}
+int isPrio(unsigned int pacote)
+{
+return pacote&4096; //tem o bit 1 na exata posição 12 contando de 0? aka 2¹²=4096
+}
+
+
+
+int main() {
+
+   unsigned int pacote1 = 0x7801E3A2;
+   unsigned int pacote2 = 0x0801FBA2;
+   unsigned int pacote3=1004096;
+   unsigned int novopacote;
+
+   printf("prio pac1 = %s\n", isPrio(pacote1) ? "S" : "N");
+   printf("prio pac2 = %s\n", isPrio(pacote2) ? "S" : "N");
+   printf("seq pac1 = %d\n",getSeq(pacote1));
+   printf("seq pac2 = %d\n",getSeq(pacote2));	
+
+   printf("prio pac3 = %s\n", isPrio(pacote3) ? "S" : "N");
+
+   return 0;
+}
+
+./aula3.2
+prio pac1 = N
+prio pac2 = S
+seq pac1 = 15
+seq pac2 = 1
+prio pac3 = S
+
+
+A aula passa muito rápido!!

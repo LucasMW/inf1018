@@ -1,0 +1,199 @@
+/*Relatório*/
+
+pack.c
+#include<stdlib.h>
+double foo (double a, int b);
+struct X {
+  int vi;
+  double vd;
+  struct X *next;
+};
+double pack (struct X *px) {
+  double acc = 0;
+  while (px != NULL) {
+    acc += foo(px->vd, px->vi);
+    px = px->next;
+  }
+  return acc;
+}
+
+packpreserve.s
+.global foo, pack
+
+pack: 
+		push %ebp
+		mov %esp, %ebp /* início */
+		push %ebx 
+		
+		sub $8, %esp /* aloque espaço para uma double */
+		fldz  /* pilha recebe 0 */
+		fstpl -8(%ebp) /* jogue 0 na double */
+
+		mov 8(%ebp), %ecx   /* ecx=px */
+
+L1:		cmp $0, %ecx /* px!=0 */
+		je  L2 /* px==0, caia fora*/
+		push %ecx /* protects %ecx from call */
+		
+		/* Call foo */
+		push (%ecx) /* empilhe vi */		
+		fldl 4(%ecx)  /* joga a vd pra st(0) */
+		sub $8, %esp /* "Push Double" Aloque um double na pilha" */
+		fstpl (%esp) /* Jogue o vd na pilha */
+		call foo /* retorne no st(0) */
+		add $12, %esp /* int  + double */
+
+		pop %ecx /* Restaure %ecx */
+		fldl -8(%ebp) /* Ponha a double no st(0) */ 
+		
+		faddp  /* st(0) +st(1) */
+		fstpl -8(%ebp) /* Jogue o st(0) na double */ 
+		
+		mov 12(%ecx), %ecx /* px= px->next */
+		jmp L1 /* volte pro loop */
+
+L2:		fldl -8(%ebp) /* jogue a double para st(0) */
+		/*add $8, %esp /*desaloque essa double */
+		pop %ebx
+		mov %ebp, %esp
+		pop %ebp
+		ret
+
+[douro.grad.inf.puc-rio.br:~] cd inf1018/aula18
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gedit pack.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gedit packpreserve.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -S -O0 pack.c
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gedit pack.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -o prog3 main2.c packpreserve.s foo.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] ./prog3                            pack=-28.500000
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -o prog3 main2.c pack.s foo.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] ./prog3                            pack=-28.500000
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -o prog3 main2.c pack.c foo.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] ./prog3                            pack=-28.500000
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] 
+
+4)  D last //name used as extern
+    T func 
+	U s
+	U transf 
+	d min //static
+	U pow
+	
+5)pack1,s
+/*struct X1 {
+  int vi;
+  float vf;
+};
+
+double pack1 (struct X1 *px, int n) {
+  double acc = 0;
+  int i;
+  for (i=0;i<n;i++)
+    acc += foo(px[i].vf, px[i].vi);
+  return acc;
+}*/
+
+.global foo, pack1
+
+pack1:
+
+		push %ebp
+		mov %esp, %ebp /* início */
+		push %ebx 
+		
+		sub $8, %esp /* aloque espaço para uma double */
+		fldz  /* pilha recebe 0 */
+		fstpl -12(%ebp) /* jogue 0 na double */
+
+		mov 8(%ebp), %ecx   /* ecx=&px[0] */
+		mov 12(%ebp), %eax /* int n */
+		mov $0, %ebx /* %ebx=i */
+
+L1:		cmp %eax, %ebx /* i<n */
+		jge  L2 /* i>=n, caia fora*/
+		push %ecx /* protects from call */
+		push %eax
+		push %edx
+
+		/* Call foo */
+		mov %ebx, %edx /* edx = i;*/
+		shll $3, %edx /* edx*8 */
+		add %ecx, %edx
+		push (%edx) /*push vi*/
+		sub $8, %esp
+		flds 4(%edx)
+		fstpl (%esp)
+		call foo
+		add $12, %esp
+		pop %edx /* Restaure  */
+		pop %eax
+		pop %ecx
+		fldl -12(%ebp) /* Ponha a double no st(0) */ 
+		
+		faddp  /* st(0) +st(1) */
+		fstpl -12(%ebp) /* Jogue o st(0) na double */ 
+		
+		
+		add $1,%ebx /* i++ */
+		jmp L1 /* volte pro loop */
+
+L2:		fldl -12(%ebp) /* jogue a double para st(0) */
+		/*add $8, %esp /*desaloque essa double */
+		add $8, %esp
+		pop %ebx
+		
+		mov %ebp, %esp
+		pop %ebp
+		ret
+
+
+main3.c
+#include<stdio.h>
+#include<stdlib.h>
+struct X1 {
+ int vi;
+  float vf;
+};
+typedef struct X1 El;
+
+double foo (double a, int b);
+double pack1 (struct X1 *px, int n);
+
+int main (void)
+{
+int i;
+El * v;
+v=(El*)malloc(sizeof(El)*10);
+for(i=0;i<10;i++)
+{
+v[i].vi=-i;
+v[i].vf=i/1.5;
+}
+printf("pack=%lf\n",pack1(&v[0],10));
+return 0;
+}
+pack1.c
+struct X1 {
+  int vi;
+  float vf;
+};
+double foo (double a, int b);
+double pack1 (struct X1 *px, int n) {
+  double acc = 0;
+  int i;
+  for (i=0;i<n;i++)
+    acc += foo(px[i].vf, px[i].vi);
+  return acc;
+}
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -o prog4 main3.c pack1.s foo.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] ./prog4
+pack=190.000000
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] gcc -Wall -m32 -o prog4 main3.c pack1.c foo.s
+[douro.grad.inf.puc-rio.br:~/inf1018/aula18] ./prog4
+pack=190.000000
+
+
+
+
+ 	
+	

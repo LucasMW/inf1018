@@ -1,0 +1,45 @@
+Relatório Aula17
+
+(3)
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -c -Wall temp1.c
+temp1.c:5:6: error: conflicting types for ‘a’
+ char a = 1;
+      ^
+In file included from temp1.c:2:0:
+temp1.h:1:12: note: previous declaration of ‘a’ was here
+ extern int a;
+            ^
+4.1)
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -c -Wall temp1.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -c -Wall temp2.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -o prog temp1.o temp2.o
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] ./prog                 1277
+
+a=1024 => a=0x00000A00
+FOO: a=-3 => a=0x00000AFD =1277 
+Little endian reasons;
+
+4.2)[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -c -Wall temp1.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -c -Wall temp2.c
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] gcc -m32 -o prog temp1.o temp2.o
+temp2.o:(.bss+0x0): multiple definition of `a'
+temp1.o:(.data+0x0): first defined here
+/usr/bin/ld: Warning: size of symbol `a' changed from 4 in temp1.o to 1 in temp2.o
+collect2: error: ld returned 1 exit status
+
+'a' está sendo o nome de uma variável global em temp1.c e de outra variável global declarada em temp2.c . O compilador chia.
+
+4.3)"b" The symbol is in the uninitialized data section
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] nm temp2.o             00000000 b a
+00000000 D b
+00000000 T foo
+"a" do temp2.c está como uma área de memória independente do resto. Foo opera nela. Mas a que é chamada na main é a "a" global definida na temp1.c , cujo valor é 1024
+[shazan.grad.inf.puc-rio.br:~/inf1018/aula17] ./prog
+1024
+
+
+5) Na primeira não executa. Segmentation fault (core dumped)
+ 	Na segunda executa, e o valor foi o do a definido na temp1.c
+ Isso ocorre porque ele encara o &b como endereço de uma função b()
+ e executa o valor de b como código de máquina. O primeiro valor arruina o programa completamente. Mas o segundo é planejado. É um RET
+
