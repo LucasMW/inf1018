@@ -1,0 +1,50 @@
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] ./varinttest
+
+	Testando Zigzag
+
+0 encoded as 0
+-1 encoded as 1
+1 encoded as 2
+-2 encoded as 3
+2147483647 encoded as 4294967294
+-2147483648 encoded as 4294967295
+
+	Teste bem sucedido
+
+	Testando BytesForVarint
+
+numero 1 bfv 1 bf2 1
+numero 300 bfv 2 bf2 2
+numero 150 bfv 2 bf2 2
+numero 128 bfv 2 bf2 2
+numero 127 bfv 1 bf2 1
+numero 126 bfv 1 bf2 1
+
+	Testando Varint
+
+1 tranformado em varint 1 
+ Ocupa nb: 1
+128 tranformado em varint 8001
+Ocupa nb: 2
+300 tranformado em varint ac02
+Ocupa nb: 2
+131264 tranformado em varint c08108
+Ocupa nb: 3
+300 - 12c
+44034 - ac02
+
+sizeofint: 4 size of long long int 8
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] hexdump -C arquivo2
+00000000  08 ac 02 10 ab 02 1a 02  6f 69 20 c0 81 08 0a     |........oi ....|
+0000000f
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] hexdump  arquivo2
+0000000 ac08 1002 02ab 021a 696f c020 0881 000a
+000000f
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] hexdump -C  arquivo1
+00000000  08 02 10 01 0a                                    |.....|
+00000005
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] hexdump  arquivo1
+0000000 0208 0110 000a                         
+0000005
+[mississipi.grad.inf.puc-rio.br:~/inf1018/trab1] 
+

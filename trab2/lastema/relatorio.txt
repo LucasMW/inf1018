@@ -1,0 +1,632 @@
+Relatório
+
+O Funcionamento do programa é garantido para as situações presentes dos descritos testes e não mais
+que isso
+
+para ints: Amarrar, inverter ordem, deixar a função igual:
+Foi também usao o teste disponívelna WebPage
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] gcc -m32 -lm -Wa,--execstack -o test1 gera_func.c inttest1.c
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] ./test1                  Parametro nao amarrado - ordem: 1
+Parametro 1 - tamanho 4
+8
+0x80ae008 - 55
+0x80ae009 - 89
+0x80ae00a - e5
+0x80ae00b - 68
+0x80ae00c - 02
+0x80ae00d - 00
+0x80ae00e - 00
+0x80ae00f - 00
+0x80ae010 - ff
+0x80ae011 - 75
+0x80ae012 - 08
+0x80ae013 - e8
+0x80ae014 - 0c
+0x80ae015 - ac
+0x80ae016 - f9
+0x80ae017 - ff
+0x80ae018 - c9
+0x80ae019 - c3
+0x80ae01a - 00
+0x80ae01b - 00
+0x80ae01c - 00
+0x80ae01d - 00
+0x80ae01e - 00
+0x80ae01f - 00
+0x80ae020 - 00
+0x80ae021 - 00
+0x80ae022 - 00
+0x80ae023 - 00
+0x80ae024 - 00
+0x80ae025 - 00
+0x80ae026 - 00
+0x80ae027 - 00
+A/2: 5 VS DivBy2 5
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+Parametro nao amarrado - ordem: 1
+Parametro nao amarrado - ordem: 2
+Parametro 1 - tamanho 4
+8
+Parametro 2 - tamanho 4
+Vem depois de 12 bytes
+12
+0x80ae030 - 55
+0x80ae031 - 89
+0x80ae032 - e5
+0x80ae033 - ff
+0x80ae034 - 75
+0x80ae035 - 08
+0x80ae036 - ff
+0x80ae037 - 75
+0x80ae038 - 0c
+0x80ae039 - e8
+0x80ae03a - e6
+0x80ae03b - ab
+0x80ae03c - f9
+0x80ae03d - ff
+0x80ae03e - c9
+0x80ae03f - c3
+0x80ae040 - 00
+0x80ae041 - 00
+0x80ae042 - 00
+0x80ae043 - 00
+0x80ae044 - 00
+0x80ae045 - 00
+0x80ae046 - 00
+0x80ae047 - 00
+0x80ae048 - 00
+0x80ae049 - 00
+0x80ae04a - 00
+0x80ae04b - 00
+0x80ae04c - 00
+0x80ae04d - 00
+0x80ae04e - 00
+0x80ae04f - 00
+b/a: 2 VS InvDiv 2
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+Parametro nao amarrado - ordem: 1
+Parametro nao amarrado - ordem: 2
+Parametro 1 - tamanho 4
+8
+Parametro 2 - tamanho 4
+Vem depois de 12 bytes
+12
+0x80ae058 - 55
+0x80ae059 - 89
+0x80ae05a - e5
+0x80ae05b - ff
+0x80ae05c - 75
+0x80ae05d - 0c
+0x80ae05e - ff
+0x80ae05f - 75
+0x80ae060 - 08
+0x80ae061 - e8
+0x80ae062 - be
+0x80ae063 - ab
+0x80ae064 - f9
+0x80ae065 - ff
+0x80ae066 - c9
+0x80ae067 - c3
+0x80ae068 - 00
+0x80ae069 - 00
+0x80ae06a - 00
+0x80ae06b - 00
+0x80ae06c - 00
+0x80ae06d - 00
+0x80ae06e - 00
+0x80ae06f - 00
+0x80ae070 - 00
+0x80ae071 - 00
+0x80ae072 - 00
+0x80ae073 - 00
+0x80ae074 - 00
+0x80ae075 - 00
+0x80ae076 - 00
+0x80ae077 - 00
+a/b: 5 VS NormalDiv: 5
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] 
+
+O mesmo teste foi usado em chars
+
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] gcc -m32 -lm -Wa,--execstack -o ctest1 gera_func.c chartest1.c
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] ./ctest1                 Parametro nao amarrado - ordem: 1
+Parametro 1 - tamanho 4
+8
+0x9cec008 - 55
+0x9cec009 - 89
+0x9cec00a - e5
+0x9cec00b - 6a
+0x9cec00c - 02
+0x9cec00d - ff
+0x9cec00e - 75
+0x9cec00f - 08
+0x9cec010 - e8
+0x9cec011 - 0f
+0x9cec012 - cc
+0x9cec013 - 35
+0x9cec014 - fe
+0x9cec015 - c9
+0x9cec016 - c3
+0x9cec017 - 00
+0x9cec018 - 00
+0x9cec019 - 00
+0x9cec01a - 00
+0x9cec01b - 00
+0x9cec01c - 00
+0x9cec01d - 00
+0x9cec01e - 00
+0x9cec01f - 00
+0x9cec020 - 00
+0x9cec021 - 00
+0x9cec022 - 00
+0x9cec023 - 00
+0x9cec024 - 00
+0x9cec025 - 00
+0x9cec026 - 00
+0x9cec027 - 00
+A/2: 5 VS DivBy2 5
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+Parametro nao amarrado - ordem: 1
+Parametro nao amarrado - ordem: 2
+Parametro 1 - tamanho 4
+8
+Parametro 2 - tamanho 4
+Vem depois de 12 bytes
+12
+0x9cec030 - 55
+0x9cec031 - 89
+0x9cec032 - e5
+0x9cec033 - ff
+0x9cec034 - 75
+0x9cec035 - 08
+0x9cec036 - ff
+0x9cec037 - 75
+0x9cec038 - 0c
+0x9cec039 - e8
+0x9cec03a - e6
+0x9cec03b - cb
+0x9cec03c - 35
+0x9cec03d - fe
+0x9cec03e - c9
+0x9cec03f - c3
+0x9cec040 - 00
+0x9cec041 - 00
+0x9cec042 - 00
+0x9cec043 - 00
+0x9cec044 - 00
+0x9cec045 - 00
+0x9cec046 - 00
+0x9cec047 - 00
+0x9cec048 - 00
+0x9cec049 - 00
+0x9cec04a - 00
+0x9cec04b - 00
+0x9cec04c - 00
+0x9cec04d - 00
+0x9cec04e - 00
+0x9cec04f - 00
+b/a: 2 VS InvDiv 2
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+Parametro nao amarrado - ordem: 1
+Parametro nao amarrado - ordem: 2
+Parametro 1 - tamanho 4
+8
+Parametro 2 - tamanho 4
+Vem depois de 12 bytes
+12
+0x9cec058 - 55
+0x9cec059 - 89
+0x9cec05a - e5
+0x9cec05b - ff
+0x9cec05c - 75
+0x9cec05d - 0c
+0x9cec05e - ff
+0x9cec05f - 75
+0x9cec060 - 08
+0x9cec061 - e8
+0x9cec062 - be
+0x9cec063 - cb
+0x9cec064 - 35
+0x9cec065 - fe
+0x9cec066 - c9
+0x9cec067 - c3
+0x9cec068 - 00
+0x9cec069 - 00
+0x9cec06a - 00
+0x9cec06b - 00
+0x9cec06c - 00
+0x9cec06d - 00
+0x9cec06e - 00
+0x9cec06f - 00
+0x9cec070 - 00
+0x9cec071 - 00
+0x9cec072 - 00
+0x9cec073 - 00
+0x9cec074 - 00
+0x9cec075 - 00
+0x9cec076 - 00
+0x9cec077 - 00
+a/b: 1 VS NormalDiv: 1
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+SUCESS
+Floating exception (core dumped)
+[missouri.grad.inf.puc-rio.br:~/inf1018/trab2/lastema] 
+
